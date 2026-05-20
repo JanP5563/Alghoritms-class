@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{array, booktabs}
+\usepackage[table]{xcolor}
 \setlength{\aboverulesep}{0pt}
 \setlength{\belowrulesep}{0pt}
 \newcommand\VRule[1][\arrayrulewidth]{\vrule width #1}
@@ -31,7 +32,7 @@
 			\\\specialrule{1.5pt}{0pt}{0pt}
 		\end{tabular}
 	\end{table}
-	\begin{enumerate}[label=\alph*)]
+	lp\begin{enumerate}[label=\alph*)]
 		\item For this exercise we used code from file "Zad1Aa.R". \newline Summarizing the logistic regression for provided dataset we receive following parameters:
 		\newline
 		\begin{center}
@@ -81,11 +82,16 @@
 		\includegraphics[scale=0.5]{plot1Ac}
 		Moreover, the graph is also the same. This is not surprising as it confirms hypothesis from sub-point b) that when coordinates is almost perfectly corresponding with our model. This we may conclude, that the model would only change if value on y axis were 0 which we would then consider as outlier. But ones placed on x axis to the right and keeping y=1 does not affect model.
 		\item To sum up all above we may propose advantages and disadvantages
+		\begin{center}
+			\renewcommand{\arraystretch}{1.5} 
+			\begin{tabular}{|p{0.45\textwidth}|p{0.45\textwidth}|}
+				\hline
+				\rowcolor{gray!20} 
+				\textbf{Advantages} & \textbf{Disadvantages} \\
+				\hline
+				\cellcolor{green!10} Simple algoritm & \cellcolor{red!10} Very sensitive to outliers \\
+				\hline
+			\end{tabular}
+		\end{center}
 	\end{enumerate}
-	
-	adventage: simple algoritm
-	
-	disadvantage: very sensitive to outliers
-	
-	how to avoid overfitting: 
 \end{document}
