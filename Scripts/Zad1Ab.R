@@ -28,7 +28,7 @@ x_seq <- seq(min(x), max(x), length.out = n)
 # Predict probabilities directly
 P_smooth <- predict(m, newdata = data.frame(x = x_seq), type = "response")
 
-png('plot1Ab.png', width = 1500, height = 1500, res = 150, type = "cairo", bg="white")
+png('../Plots/plot1Ab.png', width = 1500, height = 1500, res = 150, type = "cairo", bg="white")
 # ---------- Plot -------------------
 plot(x, y, pch = 16, cex = 1.5, col = col_points,
      xlab = "Hours", ylab = "Probability",
