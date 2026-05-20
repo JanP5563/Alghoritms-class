@@ -1,0 +1,91 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{array, booktabs}
+\setlength{\aboverulesep}{0pt}
+\setlength{\belowrulesep}{0pt}
+\newcommand\VRule[1][\arrayrulewidth]{\vrule width #1}
+\usepackage{graphicx}
+\graphicspath{ {./plots/} }
+\usepackage{enumitem}
+
+\title{Coursework for Algorithms for Data Analysis and Data Mining
+	(I+II)}
+\author{Hassan Bagzada, Jan Pokraśniewicz, Maciej Lemański, Tomasz Żołądek}
+\date{08.05.2026}
+
+\begin{document}
+	\maketitle
+	\part{A. Data Analysis and Regression}
+	\section{Logistic Regression}
+	\indent \indent Data provided for analysis with logistic regression was placed in a table below.
+	\begin{table}[htbp]
+		\centering
+		\caption{Numbers of hours on programming and final result.}
+		\label{label}
+		\begin{tabular}{!{\VRule[1.5pt]} c | *{10}{c} !{\VRule[1.5pt]}}
+			\specialrule{1.5pt}{0pt}{0pt}
+			Hours & 25 & 35 & 40 & 50 & 55 & 60 & 70 & 89 & 92 & 100  \\\hline
+			Result & 0 & 0 & 0 & 1 & 0 & 1 & 1 & 1 & 1 & 1  
+			\\\specialrule{1.5pt}{0pt}{0pt}
+		\end{tabular}
+	\end{table}
+	\begin{enumerate}[label=\alph*)]
+		\item For this exercise we used code from file "Zad1Aa.R". \newline Summarizing the logistic regression for provided dataset we receive following parameters:
+		\newline
+		\begin{center}
+			\begin{tabular}{!{\VRule[1.5pt]} c !{\VRule[1.2pt]} *{3}{c|} c !{\VRule[1.5pt]}}
+				\specialrule{1.5pt}{0pt}{0pt}
+				Variable & Estimate  & Std. Error & z value & $p$-value
+				\\\specialrule{1.2pt}{0pt}{0pt}
+				Intercept & -10.8360 & 8.3232 & -1.302 & 0.193 \\\hline
+				x & 0.2091 & 0.1576 & 1.327 & 0.185
+				\\\specialrule{1.5pt}{0pt}{0pt}
+			\end{tabular}
+		\end{center}
+		As we may see, basing on data from table 2, the z values for both variables are rather high what is proven by $p$-value being higher than 0.1 what can be considered as quite large. It is indeed result of low amount of data - 10 records equivalent to 9 degrees of freedom. This means that significance of our model is low thus statistically it is not important. Nevertheless, we may conclude that direction of dependence between hours of programming and final result is positive.
+		\newline We may also plot the graph below.
+		\newline
+		\includegraphics[scale=0.5]{plot1Aa}
+		\item For this exercise we used code from file "Zad1Ab.R". 
+		\newline Summarizing the logistic regression for provided dataset, excluding point (100, 1), we receive following parameters:
+		\begin{center}
+			\begin{tabular}{!{\VRule[1.5pt]} c !{\VRule[1.2pt]} *{3}{c|} c !{\VRule[1.5pt]}}
+				\specialrule{1.5pt}{0pt}{0pt}
+				Variable & Estimate  & Std. Error & z value & $p$-value
+				\\\specialrule{1.2pt}{0pt}{0pt}
+				Intercept & -10.8360 & 8.3232 & -1.302 & 0.193 \\\hline
+				x & 0.2091 & 0.1576 & 1.327 & 0.185
+				\\\specialrule{1.5pt}{0pt}{0pt}
+			\end{tabular}
+		\end{center}
+		As we may see value of all parameters is the same as from the a) sub-point. 
+		\newline
+		\includegraphics[scale=0.5]{plot1Ab}
+		Moreover, the graph is also the same. Thus, we may conclude that removing point (100, 1) does not influence this model. We may suppose that it influenced by almost perfect correspondence of coordinates of this point with proposed model.
+		\item For this exercise we used code from file "Zad1Ac.R". 
+		\newline Summarizing the logistic regression for dataset from subpoint a, including new point (115, 1), we receive following parameters:
+		\begin{center}
+			\begin{tabular}{!{\VRule[1.5pt]} c !{\VRule[1.2pt]} *{3}{c|} c !{\VRule[1.5pt]}}
+				\specialrule{1.5pt}{0pt}{0pt}
+				Variable & Estimate  & Std. Error & z value & $p$-value
+				\\\specialrule{1.2pt}{0pt}{0pt}
+				Intercept & -10.8360 & 8.3232 & -1.302 & 0.193 \\\hline
+				x & 0.2091 & 0.1576 & 1.327 & 0.185
+				\\\specialrule{1.5pt}{0pt}{0pt}
+			\end{tabular}
+		\end{center}
+		As we may see value of all parameters is the same as from the a) and b) sub-points. 
+		\newline
+		\includegraphics[scale=0.5]{plot1Ac}
+		Moreover, the graph is also the same. This is not surprising as it confirms hypothesis from sub-point b) that when coordinates is almost perfectly corresponding with our model. This we may conclude, that the model would only change if value on y axis were 0 which we would then consider as outlier. But ones placed on x axis to the right and keeping y=1 does not affect model.
+		\item To sum up all above we may propose advantages and disadvantages
+	\end{enumerate}
+	
+	adventage: simple algoritm
+	
+	disadvantage: very sensitive to outliers
+	
+	how to avoid overfitting: 
+\end{document}
