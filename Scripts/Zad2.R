@@ -9,7 +9,7 @@ options(scipen = 999)
 
 # Reading and describing the data --------------------------------------
 # Numeric data
-path = "C://Jan//Studia//IV SEMESTR//Algorithms//sggw_b.csv" # input your own path for the sggw_b file
+path = "../data/sggw_b.csv"
 data <- read.csv(path)
 str(data)
 summary(data)
