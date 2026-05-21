@@ -2,7 +2,8 @@
 
 install.packages("FNN") # for knn regression
 library(FNN)
-
+install.packages("modelsummary")
+library(modelsummary)
 
 # Improving readibility in plots
 options(scipen = 999)
@@ -12,7 +13,10 @@ options(scipen = 999)
 path = "../data/sggw_b.csv"
 data <- read.csv(path)
 str(data)
-summary(data)
+data_c <- data
+data_c$Price... <- data_c$Price.../1000000
+colnames(data_c)[colnames(data_c) == "Price..."] <- "Price (in mln.)"
+datasummary(All(data_c) ~ Mean + SD + Min + Max, data = data, output = "latex")
 head(data, 6)
 variance <- sapply(data[,], var)
 
@@ -25,7 +29,7 @@ hist(data$Area..ft2.,
      main = "Area", 
      xlab = "Area  (ft^2)", 
      ylab = "Number of houses", 
-     col = "lightblue")
+     col = "#3498DB")
 
 columns <- c("Bedrooms", "Bathrooms", "Stories")
 
@@ -34,7 +38,7 @@ for (col in columns) {
         main = col, 
         xlab = col, 
         ylab = "Number of houses", 
-        col = "lightblue")
+        col = "#3498DB")
 }
 
 par(mfrow = c(1, 1))
@@ -42,7 +46,7 @@ hist(data$Price/1000000,
      main = "Price", 
      xlab = "Price (in millions)", 
      ylab = "Number of houses", 
-     col = "lightblue")
+     col = "#3498DB")
 
 
 # Binary data
@@ -54,7 +58,7 @@ par(mar = c(8, 4, 4, 2) + 0.1)
 x_coords <- barplot(percents, 
                     main = "% of houses having the amenity",
                     ylab = "% of houses", 
-                    col = "lightblue",
+                    col = "#3498DB",
                     ylim = c(0, 100),
                     names.arg = "")
 
