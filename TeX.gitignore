@@ -11,6 +11,9 @@
 *.cb
 *.cb2
 .*.lb
+*.synctex.gz
+*.fls
+*.fdb_latexmk
 
 ## Intermediate documents:
 *.dvi
