@@ -10,6 +10,10 @@
 \usepackage{graphicx}
 \graphicspath{ {./plots/} }
 \usepackage{enumitem}
+\usepackage{tabularray}
+\usepackage{siunitx}    
+\usepackage{float}
+\usepackage[top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
 
 \title{Coursework for Algorithms for Data Analysis and Data Mining
 	(I+II)}
@@ -18,7 +22,7 @@
 
 \begin{document}
 	\maketitle
-	\part{A. Data Analysis and Regression}
+	\part*{A. Data Analysis and Regression}
 	\section{Logistic Regression}
 	\indent \indent Data provided for analysis with logistic regression was placed in a table below.
 	\begin{table}[htbp]
@@ -64,7 +68,7 @@
 		As we may see value of all parameters is the same as from the a) sub-point. 
 		\newline
 		\includegraphics[scale=0.5]{plot1Ab}
-		Moreover, the graph is also the same. Thus, we may conclude that removing point (100, 1) does not influence this model. We may suppose that it influenced by almost perfect correspondence of coordinates of this point with proposed model.
+		\\ Moreover, the graph is also the same. Thus, we may conclude that removing point (100, 1) does not influence this model. We may suppose that it influenced by almost perfect correspondence of coordinates of this point with proposed model.
 		\item For this exercise we used code from file "Zad1Ac.R". 
 		\newline Summarizing the logistic regression for data set from sub-point a, including new point (115, 1), we receive following parameters:
 		\begin{center}
@@ -95,9 +99,64 @@
 		\end{center}
 	\end{enumerate}
 	
-	\part{B. kNN Regression Analysis}
+	\clearpage
+	\setcounter{section}{0}
+	\part*{B. kNN Regression Analysis}
 	\section{Summary of the sggw.b data}
-	Here I will provide statistical analysis for the data. We have  
+		Here we used code from Zad2.R file.
+		We will provide statistical analysis for the data. We have 10 explanatory features and one target feature - the price of the house. In the explanatory features (X-features) we have the Area, the numbers of Bathrooms, Bedrooms etc, and binary feautures telling us if there is metro in close proximity, is the place furnished, or is it a popular area.
+		\\
+		
+		\begin{table}[H]
+			\centering
+			\begin{tblr}[         %% tabularray outer open
+				]                     %% tabularray outer close
+				{                     %% tabularray inner open
+					colspec={Q[]Q[]Q[]Q[]Q[]},
+					hline{2}={1-5}{solid, black, 0.05em},
+					hline{1}={1-5}{solid, black, 0.08em},
+					hline{13}={1-5}{solid, black, 0.08em},
+					column{1}={}{halign=l},
+					column{2-5}={}{halign=r},
+				}                     %% tabularray inner close
+				& Mean & SD & Min & Max \\
+				Area..ft2. & \num{5167.32} & \num{2186.64} & \num{2145.00} & \num{16200.00} \\
+				Bedrooms & \num{3.02} & \num{0.71} & \num{2.00} & \num{5.00} \\
+				Bathrooms & \num{1.40} & \num{0.59} & \num{1.00} & \num{3.00} \\
+				Stories & \num{1.81} & \num{0.95} & \num{1.00} & \num{4.00} \\
+				Metro & \num{0.83} & \num{0.38} & \num{0.00} & \num{1.00} \\
+				Basement & \num{0.38} & \num{0.49} & \num{0.00} & \num{1.00} \\
+				Aircon & \num{0.32} & \num{0.47} & \num{0.00} & \num{1.00} \\
+				ParkingSpace & \num{0.68} & \num{0.87} & \num{0.00} & \num{3.00} \\
+				PopularArea & \num{0.26} & \num{0.44} & \num{0.00} & \num{1.00} \\
+				Furnished & \num{0.42} & \num{0.50} & \num{0.00} & \num{1.00} \\
+				Price (in mln.) & \num{4.88} & \num{1.93} & \num{1.75} & \num{10.85} \\
+			\end{tblr}
+		\end{table}  
+		
+		\begin{center}
+			\includegraphics[scale=0.8]{plotB1}
+		\end{center}
+		
+		We can see that the area is similar to the Chi-squared distribution, the peak is around 3000 square feet. Most houses have 3 bedrooms, 1 bathroom and 1 or 2 stories
+		
+		\begin{center}
+			\includegraphics[scale=0.6]{plotB3}
+		\end{center}
+		
+		Most of the houses has a metro station nearby at over 80 percents, and a parking space at 70. The place being furnished or having a basement has around 40 percent chance. The least chance is to get an air conditioning or being in the popular area.
+		
+		\begin{center}
+			\includegraphics[scale=0.6]{plotB2}
+		\end{center}
+		
+		The price has a distribution similar to the area distribution.
+	
+	\section{kNN regression data analysis}
+		Why did we choose kNN? It is perfect for predicting the value of the houses, as it chooses the most similar places, and checks the price with them. We used FNN (Fast Nearest Neighbor Search Algorithms and Applications) library, in which it is possible to do regression on k nearest neighbours model
+		
+		
+		% to do: opisz punkt 2 i 3, dodaj plot z różnymi k i rmse
 	
 	
 \end{document}
