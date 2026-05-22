@@ -103,6 +103,7 @@
 	\setcounter{section}{0}
 	\part*{B. kNN Regression Analysis}
 	\section{Summary of the sggw.b data}
+		
 		Here we used code from Zad2.R file.
 		We will provide statistical analysis for the data. We have 10 explanatory features and one target feature - the price of the house. In the explanatory features (X-features) we have the Area, the numbers of Bathrooms, Bedrooms etc, and binary feautures telling us if there is metro in close proximity, is the place furnished, or is it a popular area.
 		\\
@@ -120,7 +121,7 @@
 					column{2-5}={}{halign=r},
 				}                     %% tabularray inner close
 				& Mean & SD & Min & Max \\
-				Area..ft2. & \num{5167.32} & \num{2186.64} & \num{2145.00} & \num{16200.00} \\
+				Area in \si{ft^2} & \num{5167.32} & \num{2186.64} & \num{2145.00} & \num{16200.00} \\
 				Bedrooms & \num{3.02} & \num{0.71} & \num{2.00} & \num{5.00} \\
 				Bathrooms & \num{1.40} & \num{0.59} & \num{1.00} & \num{3.00} \\
 				Stories & \num{1.81} & \num{0.95} & \num{1.00} & \num{4.00} \\
@@ -138,13 +139,13 @@
 			\includegraphics[scale=0.8]{plotB1}
 		\end{center}
 		
-		We can see that the area is similar to the Chi-squared distribution, the peak is around 3000 square feet. Most houses have 3 bedrooms, 1 bathroom and 1 or 2 stories
+		We can see that the area is similar to the $\chi^2$ distribution, the peak is around 3000$^2$ feet. Most houses have 3 bedrooms, 1 bathroom and 1 or 2 stories
 		
 		\begin{center}
 			\includegraphics[scale=0.6]{plotB3}
 		\end{center}
 		
-		Most of the houses has a metro station nearby at over 80 percents, and a parking space at 70. The place being furnished or having a basement has around 40 percent chance. The least chance is to get an air conditioning or being in the popular area.
+		Most of the houses has a metro station nearby at over 80 \%, and a parking space at 70 \%. The place being furnished or having a basement has around 40 \% chance. The least chance is to get an air conditioning or being in the popular area.
 		
 		\begin{center}
 			\includegraphics[scale=0.6]{plotB2}
@@ -153,10 +154,20 @@
 		The price has a distribution similar to the area distribution.
 	
 	\section{kNN regression data analysis}
-		Why did we choose kNN? It is perfect for predicting the value of the houses, as it chooses the most similar places, and checks the price with them. We used FNN (Fast Nearest Neighbor Search Algorithms and Applications) library, in which it is possible to do regression on k nearest neighbours model
 		
+		Why did we choose kNN? It is perfect for predicting the value of the houses, as it chooses the most similar places, and checks the price with them. We used FNN (Fast Nearest Neighbor Search Algorithms and Applications) library, in which it is possible to do regression on k nearest neighbours model. We need to scale the data, since the kNN alghoritm uses Euclidean metric of proximinity.
+		We firstly split the data into train and test set (80/20), and then trained the scaler on training data. The next step was to scale the test data, but the scaling was based only on the center and scale of the training data, to avoid bias. Then we tried to find the number of neighbours which minimizes the RMSE value. It turned out, that the best value was *k = 2*. 
 		
-		% to do: opisz punkt 2 i 3, dodaj plot z różnymi k i rmse
+		\begin{center}
+			\includegraphics[scale=0.6]{plotB4}
+		\end{center}
+		
+		The RMSE is 25\% of the mean price. It is an acceptable value, since we had only 100 houses to train a model on. It is interesting how only the 2 neighbouring houses had given the best results in our analysis. It can mean that the variance between the data points was high. 
+		The R$^2$ is 82,6\%, which is a very good result. Mean average error is 0.623 mln, and the mean absolute percentage error is 11.1\%. So the average error of the prediction was only 11\% of the actual price. Given the simplicity of the alghoritm, this result is a good result.
+		
+	\clearpage
+	\setcounter{section}{0}
+	
 	
 	
 \end{document}

@@ -1,3 +1,4 @@
+setwd("C:/Jan/Studia/IV SEMESTR/Algorithms/Projekt/Scripts")
 # Project, Question B
 
 install.packages("FNN") # for knn regression
@@ -109,12 +110,16 @@ X_test <- as.data.frame(scale(
 
 # Regression for different k-values
 
-min_rmse <- 10^9
-min_k <- -1
+min_rmse <- Inf
+min_k <- NA
+n <- 15 # number of k values checked
+rmse_values <- numeric(n)
 
-for (i in 1:20) {
+for (i in 1:n) {
   prediction <- knn.reg(train = X_train, test = X_test, y = Y_train, k = i)$pred
   rmse <- sqrt(mean((Y_test - prediction)^2))
+  rmse_values[i] <- rmse
+  
   if(rmse < min_rmse){
     min_rmse <- rmse
     min_k <- i
@@ -122,7 +127,15 @@ for (i in 1:20) {
   cat("For k =", i, "RMSE is:", round(rmse/10^6, 3), "mln \n")
 }
 
+plot(1:n, rmse_values/10^6, type = "b", pch = 19, col = "#3498DB",
+     xlab = "k value", ylab = "RMSE (in mln.)",
+     main = "RMSE dependence on the k parameter")
+
+points(min_k, min_rmse/10^6, col = "red", pch = 19, cex = 1.5)
+
 cat("Min rmse is", min_rmse, "for k:", min_k)
+
+
 
 
 avg_price <- sum(Y_train)/length(Y_train)
@@ -133,3 +146,21 @@ cat("RMSE is", round(rmse/avg_price*100, 1), "percents of the average price")
 # k=1 was overfitting, k=2 is perfect, the lowest rmse score,
 # and then, after k=3 and beyond, the rmse was rising constantly, was underfit
 
+# Obliczamy przewidywania dla najlepszego k znalezionego w pętli
+best_prediction <- knn.reg(train = X_train, test = X_test, y = Y_train, k = min_k)$pred
+
+
+# 1. R^2
+ss_res <- sum((Y_test - best_prediction)^2)
+ss_tot <- sum((Y_test - mean(Y_test))^2)
+r_squared <- 1 - (ss_res / ss_tot)
+
+# 2. MAE
+mae <- mean(abs(Y_test - best_prediction))
+
+# 3. MAPE
+mape <- mean(abs((Y_test - best_prediction) / Y_test)) * 100
+
+cat("R^2:", round(r_squared, 3), "\n")
+cat("MAE:", round(mae/10^6, 3), "mln\n")
+cat("Average percentage error (MAPE):", round(mape, 1), "%\n")
