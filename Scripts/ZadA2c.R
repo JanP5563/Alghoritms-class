@@ -1,8 +1,8 @@
 setwd("C:\\Users\\rysio\\Desktop\\Informatyka\\R\\DataMining\\Project\\Plots")
 # --------- Defining data --------------
 # x <-> Hours and y <-> Results
-x <- c(0.1, 0.5, 1, 1.5, 2.05, 2.5, 3)
-y <- c(0.23, 0.65, 0.9, 0.8, 0.7, 0.6, 0.5)
+x <- c(0.1, 0.5, 1, 1.5, 2.05, 2.5, 3, 5)
+y <- c(0.23, 0.65, 0.9, 0.8, 0.7, 0.6, 0.5, 0.25)
 
 model1 <- nls(y ~ (d * x) / (1 + e * x^2), 
              start = list(d = 1, e = 1))
@@ -20,7 +20,7 @@ print(sigma(model3))
 print(sqrt(mean(residuals(model3)^2)))
 
 # ---------- Plot -------------------
-png('plotA2a.png', width = 1500, height = 1500, res = 150, type = "cairo", bg="white")
+png('plotA2c.png', width = 1500, height = 1500, res = 150, type = "cairo", bg="white")
 
 plot(x, y, pch = 19, cex = 1.2, xlab = "x", ylab = "y", cex.lab = 1.5, col = "#222222",
      main = "Models from sub-point 2a) fitted with NonLinear Least-Squares", cex.main = 1.8)

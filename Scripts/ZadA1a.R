@@ -34,6 +34,7 @@ png('../Plots/plot1Aa.png', width = 1500, height = 1500, res = 150, type = "cair
 plot(x, y, pch = 16, cex = 1.5, col = col_points,
      xlab = "Hours", ylab = "Probability",
      main = "Logistic Regression for Ex. 1A a)",
+     cex.main = 1.8,
      ylim = c(0, 1),
      xlim = c(min(x), max(x)))
 grid()

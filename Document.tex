@@ -14,6 +14,8 @@
 \usepackage{siunitx}    
 \usepackage{float}
 \usepackage[top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{tabularray}
+\usepackage{amsmath}
 
 \title{Coursework for Algorithms for Data Analysis and Data Mining
 	(I+II)}
@@ -112,7 +114,102 @@
 			\\\specialrule{1.5pt}{0pt}{0pt}
 		\end{tabular}
 	\end{table}
-	
+	And models provided for analysis are presented below:
+	\begin{center}
+		\begin{equation}
+			y = 
+			\begin{cases}
+				f1(x) = \frac{ax}{b+cx^{2}} \\
+				f2(x) = axe^{-bx + c} \\
+				f3(x) = a + bx + cx^{2} + dx^{3}
+			\end{cases}
+		\end{equation}
+	\end{center}
+	\begin{enumerate}[label=\alph*)]
+		\item For this exercise we will be using code from file 'ZadA2a.R'
+		\newline Unfortunately, first 2 models cannot be fitted, at least with Nonlinear Least-Squares implemented in R as nls() function, as they lead to singular matrices. Thus we have to change their form to avoid this problem by simplifying them.
+		\begin{center}
+			\begin{equation}
+				y = 
+				\begin{cases}
+					f1(x) = \frac{ax}{b+cx^{2}} = 
+							\frac{ax}{\frac{1}{b}(1+\frac{c}{b}x^{2})} = \frac{\frac{a}{b}x}{1+\frac{c}{b}x^{2}} =
+							\left\{
+								\begin{array}{ll}
+									d = \frac{a}{b} \\
+									e = \frac{c}{b}
+								\end{array}
+							\right\} =	
+							\frac{dx}{1+ex^{2}} \\
+					f2(x) = axe^{-bx + c} =
+							ae^{c}xe^{-bx} =
+							\left\{
+							\begin{array}{ll}
+								d =  ae^{c}
+							\end{array}
+							\right\} =
+							dxe^{-bx}
+				\end{cases}
+			\end{equation}
+		\end{center}
+		As the third model does not need any changes we finish with following forms of models:
+		\begin{center}
+			\begin{equation}
+				y = 
+				\begin{cases}
+					f1(x) = \frac{dx}{1+ex^{2}} \\
+					f2(x) = dxe^{-bx} \\
+					f3(x) = a + bx + cx^{2} + dx^{3}
+				\end{cases}
+			\end{equation}
+		\end{center}
+		and graph presented below.
+		\newline
+		\includegraphics[scale=0.5]{plotA2a}
+		\item For this exercise we will be using the same code.
+		\newline The errors of each model are presented in a table below:
+		\begin{center}
+			\begin{tblr}{
+					cell{2}{4} = {r},
+					cell{3}{4} = {r},
+					cell{4}{4} = {r},
+					vline{1-2,5} = {1}{},
+					vline{1,5} = {2-4}{},
+					vline{2} = {2-4}{gray!80},
+					hline{1-2,5} = {-}{},
+				}
+				Model & RSE   & RMSE  & Difference \\
+				f1(x) & 0.037 & 0.032 & 0.005      \\
+				f2(x) & 0.037 & 0.031 & 0.006      \\
+				f3(x) & 0.041 & 0.027 & 0.014      
+			\end{tblr}
+		\end{center}
+		As we may see, the difference between RSE and RMSE errors is small for f1 and f2, especially compering them to the one for f3 which is larger by an order in magnitude. Nevertheless, it should not be surprising as f1 and f2 models bases on 2 parameters, as we decreased amount by 1 parameter to simplify equation, when f3 bases on 4! It is worth noting that the larger the difference is, the more model tends to over-fit. Moreover, if we had not simplified the models f1 and f2 the results might have been different! However, basing on data from the table above we should reject the third model because of too large tendency to over-fit. To choose the best one between f1 and f2, considering similar, low difference, we should choose one with lowest RMSE, thus the f2.
+		
+		\item For this exercise we will be using code from file 'ZadA2c.R' and the same models as at sub-point a) and b) but the data set is extended with additional point (4, 0.25). As a result, new graph has been plotted:
+		\newline 
+		\includegraphics[scale=0.5]{plotA2c}
+		\newline
+		and a new table of errors has been created:
+		\begin{center}
+			\begin{tblr}{
+					cell{2}{4} = {r},
+					cell{3}{4} = {r},
+					cell{4}{4} = {r},
+					vline{1-2,5} = {1}{},
+					vline{1,5} = {2-4}{},
+					vline{2} = {2-4}{gray!80},
+					hline{1-2,5} = {-}{},
+				}
+				Model & RSE   & RMSE  & Difference \\
+				f1(x) & 0.048 & 0.041 & 0.007      \\
+				f2(x) & 0.054 & 0.046 & 0.008      \\
+				f3(x) & 0.079 & 0.056 & 0.023      
+			\end{tblr}
+		\end{center}
+		As we may see, the graph and table for data set extended by point (4, 0.25) differs a lot to the ones without it. Both on the graph and in the table (larger difference) we can see how f3 'explodes' between the last points when the step on x axis is larger what is an another proof for thesis that f3 is over-fitting model. Moreover, we can see that difference between errors for f1 and f2 models did not change a lot. Thus, we can say that adding new point did not significantly increase instability. However, there is noticeable difference in errors between f1 and f2 what implies that positively f1 better fits the extended data set.
+		\item To sum up, we can avoid over-fitting by using more simply thus ones with less parameters and lower degree of polynomial. Therefore, without doubt we can say that model f3 is too complex which leads to over-fitting which mean they have too much parameters. Because we have abbreviated the f1 and f2 model we must say that not only do original ones have too much parameters, thus they may over-fit, but finding the best fit with Nonlinear Least-Squares is impossible as, for such an amount of parameters, we cannot find one, most optimal solution.
+	\end{enumerate}
 	
 	\clearpage
 	\setcounter{section}{0}
@@ -120,7 +217,7 @@
 	\section{Summary of the sggw.b data}
 		
 		Here we used code from Zad2.R file.
-		We will provide statistical analysis for the data. We have 10 explanatory features and one target feature - the price of the house. In the explanatory features (X-features) we have the Area, the numbers of Bathrooms, Bedrooms etc, and binary feautures telling us if there is metro in close proximity, is the place furnished, or is it a popular area.
+		We will provide statistical analysis for the data. We have 10 explanatory features and one target feature - the price of the house. In the explanatory features (X-features) we have the Area, the numbers of Bathrooms, Bedrooms etc, and binary features telling us if there is metro in close proximity, is the place furnished, or is it a popular area.
 		\\
 		
 		\begin{table}[H]
@@ -170,7 +267,7 @@
 	
 	\section{kNN regression data analysis}
 		
-		Why did we choose kNN? It is perfect for predicting the value of the houses, as it chooses the most similar places, and checks the price with them. We used FNN (Fast Nearest Neighbor Search Algorithms and Applications) library, in which it is possible to do regression on k nearest neighbours model. We need to scale the data, since the kNN alghoritm uses Euclidean metric of proximinity.
+		Why did we choose kNN? It is perfect for predicting the value of the houses as it chooses the most similar places and checks the price with them. We used FNN (Fast Nearest Neighbor Search Algorithms and Applications) library, in which it is possible to do regression on k nearest neighbours model. We need to scale the data, since the kNN alghoritm uses Euclidean metric of proximinity.
 		We firstly split the data into train and test set (80/20), and then trained the scaler on training data. The next step was to scale the test data, but the scaling was based only on the center and scale of the training data, to avoid bias. Then we tried to find the number of neighbours which minimizes the RMSE value. It turned out, that the best value was *k = 2*. 
 		
 		\begin{center}
@@ -178,7 +275,7 @@
 		\end{center}
 		
 		The RMSE is 25\% of the mean price. It is an acceptable value, since we had only 100 houses to train a model on. It is interesting how only the 2 neighbouring houses had given the best results in our analysis. It can mean that the variance between the data points was high. 
-		The R$^2$ is 82,6\%, which is a very good result. Mean average error is 0.623 mln, and the mean absolute percentage error is 11.1\%. So the average error of the prediction was only 11\% of the actual price. Given the simplicity of the alghoritm, this result is a good result.
+		The R$^2$ is 82,6\%, which is a very good result. Mean average error is 0.623 mln, and the mean absolute percentage error is 11.1\%. So the average error of the prediction was only 11\% of the actual price. Given the simplicity of the algorithm, this result is a good result.
 		
 	\clearpage
 	\setcounter{section}{0}
