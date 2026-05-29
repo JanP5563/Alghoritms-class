@@ -34,6 +34,7 @@
 	\part*{A. Data Analysis and Regression}
 	\section{Logistic Regression}
 	\indent \indent Data provided for analysis with logistic regression was placed in a table below.
+	
 	\begin{table}[htbp]
 		\centering
 		\caption{Numbers of hours on programming and final result.}
@@ -45,9 +46,11 @@
 			\\\specialrule{1.5pt}{0pt}{0pt}
 		\end{tabular}
 	\end{table}
+	
 	\begin{enumerate}[label=\alph*)]
 		\item For this exercise we used code from file "ZadA1a.R". \newline Summarizing the logistic regression for provided data set we receive following parameters:
 		\newline
+		
 		\begin{center}
 			\begin{tabular}{!{\VRule[1.5pt]} c !{\VRule[1.2pt]} *{3}{c|} c !{\VRule[1.5pt]}}
 				\specialrule{1.5pt}{0pt}{0pt}
@@ -58,12 +61,14 @@
 				\\\specialrule{1.5pt}{0pt}{0pt}
 			\end{tabular}
 		\end{center}
+		
 		As we may see, basing on data from table 2, the z values for both variables are rather high what is proven by $p$-value being higher than 0.1 what can be considered as quite large. It is indeed result of low amount of data - 10 records equivalent to 9 degrees of freedom. This means that significance of our model is low thus statistically it is not important. Nevertheless, we may conclude that direction of dependence between hours of programming and final result is positive.
 		\newline We may also plot the graph below and find out that midpoint value is 51.83.
 		\newline
 		\includegraphics[scale=0.5]{plot1Aa}
 		\item For this exercise we used code from file "ZadA1b.R". 
 		\newline Summarizing the logistic regression for provided data set, excluding point (100, 1), we receive following parameters:
+		
 		\begin{center}
 			\begin{tabular}{!{\VRule[1.5pt]} c !{\VRule[1.2pt]} *{3}{c|} c !{\VRule[1.5pt]}}
 				\specialrule{1.5pt}{0pt}{0pt}
@@ -74,12 +79,17 @@
 				\\\specialrule{1.5pt}{0pt}{0pt}
 			\end{tabular}
 		\end{center}
+		
 		As we may see value of all parameters is the same as from the a) sub-point. 
-		\newline
-		\includegraphics[scale=0.5]{plot1Ab}
-		\\ Moreover, the graph is also the same including midpoint value. Thus, we may conclude that removing point (100, 1) does not influence this model. We may suppose that it influenced by almost perfect correspondence of coordinates of this point with proposed model.
+		
+		\begin{center}
+			\includegraphics[scale=0.5]{plot1Ab}
+		\end{center}
+			Moreover, the graph is also the same, including midpoint value. Thus, we may conclude that removing point (100, 1) does not influence this model. We may suppose that it influenced by almost perfect correspondence of coordinates of this point with proposed model.
+		
 		\item For this exercise we used code from file "ZadA1c.R". 
 		\newline Summarizing the logistic regression for data set from sub-point a, including new point (115, 1), we receive following parameters:
+		
 		\begin{center}
 			\begin{tabular}{!{\VRule[1.5pt]} c !{\VRule[1.2pt]} *{3}{c|} c !{\VRule[1.5pt]}}
 				\specialrule{1.5pt}{0pt}{0pt}
@@ -90,10 +100,14 @@
 				\\\specialrule{1.5pt}{0pt}{0pt}
 			\end{tabular}
 		\end{center}
+		
 		As we may see value of all parameters is the same as from the a) and b) sub-points. 
-		\newline
-		\includegraphics[scale=0.5]{plot1Ac}
+		\begin{center}
+			\includegraphics[scale=0.5]{plot1Ac}
+		\end{center}
+		
 		Moreover, the graph is also the same. This is not surprising as it confirms hypothesis from sub-point b) that when coordinates is almost perfectly corresponding with our model. This we may conclude, that the model would only change if value on y axis were 0 which we would then consider as outlier. But ones placed on x axis to the right and keeping y=1 does not affect model.
+		
 		\item To sum up all above we may propose advantages and disadvantages
 		\begin{center}
 			\renewcommand{\arraystretch}{1.5} 
